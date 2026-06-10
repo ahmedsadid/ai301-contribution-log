@@ -1,11 +1,8 @@
 # Contribution 1: @stylexjs/valid-styles: gridColumn / gridRow must be a stringified number
 
 **Contribution Number:** 1  
-
 **Student:** Zubayer Sadid  
-
 **Issue:** https://github.com/facebook/stylex/issues/1701  
-
 **Status:** Phase I Completed  
 
 
@@ -13,7 +10,7 @@
 
 ## Why I Chose This Issue
 
-[This issue seemed simple enough to work on as a first time contributor, but at the same time it looks like a solving it would have a meaningful impact to the repo. I have some understanding of TypeScript already, so it shouldn't be too difficult for a first contribution, plus in my experience, AI is pretty reliable for web frameworks. It's also a very new issue, so I hope I have better odds at getting feedback and potentially a merge!]
+This issue seemed simple enough to work on as a first time contributor, but at the same time it looks like a solving it would have a meaningful impact to the repo. I have some understanding of TypeScript already, so it shouldn't be too difficult for a first contribution, plus in my experience, AI is pretty reliable for web frameworks. It's also a very new issue, so I hope I have better odds at getting feedback and potentially a merge!
 
 ---
 
