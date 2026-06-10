@@ -1,9 +1,9 @@
-# Contribution [1]: [@stylexjs/valid-styles: gridColumn / gridRow must be a stringified number]
+# Contribution 1: @stylexjs/valid-styles: gridColumn / gridRow must be a stringified number
 
-**Contribution Number:** [1]  
-**Student:** [Zubayer Sadid]  
-**Issue:** [https://github.com/facebook/stylex/issues/1701]  
-**Status:** [Phase I] [Completed]
+**Contribution Number:** 1 
+**Student:** Zubayer Sadid
+**Issue:** https://github.com/facebook/stylex/issues/1701 
+**Status:** Phase I Completed
 
 ---
 
