@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Zubayer Sadid  
 **Issue:** https://github.com/facebook/stylex/issues/1701  
-**Status:** Phase I Completed  
+**Status:** Phase II Completed  
 
 
 ---
@@ -38,19 +38,47 @@ This issue seemed simple enough to work on as a first time contributor, but at t
 
 ### Environment Setup
 
-[Notes on setting up your local development environment - challenges you faced, how you solved them]
+Environment setup was pretty straightforward by following the contributing guide on the repo. However, the guide had stale documentation and did not mention the correct minimum Node version. I opened an issue for it and updated the version on the contributing guide.
+
+I just needed to install yarn and node.
 
 ### Steps to Reproduce
 
-1. [Step 1]
-2. [Step 2]
-3. [Observed result]
+1. Navigate to the ESLint plugin package:
+cd packages/@stylexjs/eslint-plugin
+2. Open the test file __tests__/stylex-valid-styles-test.js and add the following entry to the top of the first valid: [ array. This asserts that a numeric grid value should be accepted:
+`
+  import * as stylex from '@stylexjs/stylex';
+  const styles = stylex.create({
+    foo: {
+      gridColumnStart: 1,
+    }
+  });
+`,
+3. Run the linter's test suite:
+npx jest stylex-valid-styles
+
+Expected result: The test passes — gridColumnStart: 1 is valid CSS, so the linter should accept it.
+
+Actual result: The test fails. The linter reports an error on the numeric value:
+gridColumnStart value must be one of:
+auto
+a string literal
+null
+initial
+inherit
+unset
+revert
+Tests: 1 failed, 170 passed, 171 total
 
 ### Reproduction Evidence
 
-- **Commit showing reproduction:** [Link to commit in your fork]
+- **Commit showing reproduction:** https://github.com/ahmedsadid/stylex/commit/64e0bce9
 - **Screenshots/logs:** [If applicable]
-- **My findings:** [What you discovered during reproduction]
+  <img width="902" height="723" alt="image" src="https://github.com/user-attachments/assets/92a1271f-e763-4102-8782-4206ba54f0fc" />
+
+- **My findings:** Nothing in particular other than already stated info.
+
 
 ---
 
@@ -66,7 +94,7 @@ This issue seemed simple enough to work on as a first time contributor, but at t
 
 ### Implementation Plan
 
-Using UMPIRE framework (adapted):
+The grid rule in cssProperties.js (line 332) only allows auto and text — it forgot to allow numbers. I'll add isNumber to that one rule, which fixes all six grid properties at once (since they all share it). Then I'll add a couple of tests with numbers like gridColumnStart: 1 to prove it works, and run npx jest stylex-valid-styles to confirm everything passes.
 
 **Understand:** [Restate the problem]
 
