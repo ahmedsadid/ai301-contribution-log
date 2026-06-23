@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Zubayer Sadid  
 **Issue:** https://github.com/facebook/stylex/issues/1701  
-**Status:** Phase II Completed  
+**Status:** Phase III Completed  
 
 
 ---
@@ -96,71 +96,79 @@ Tests: 1 failed, 170 passed, 171 total
 
 The grid rule in cssProperties.js (line 332) only allows auto and text — it forgot to allow numbers. I'll add isNumber to that one rule, which fixes all six grid properties at once (since they all share it). Then I'll add a couple of tests with numbers like gridColumnStart: 1 to prove it works, and run npx jest stylex-valid-styles to confirm everything passes.
 
-**Understand:** [Restate the problem]
+**Understand:** The ESLint rule `stylex-valid-styles` rejects numbers like
+`gridColumnStart: 1`, even though they're valid CSS. It affects all six grid-line
+properties (gridColumn/Row + their Start/End variants).
 
-**Match:** [What similar patterns/solutions exist in the codebase?]
+**Match:** The same file already does this for `zIndex` (allows `auto` or a number),
+and PRs #1522/#1523 added bare-number support to other properties. The bug: the shared
+`gridLine` rule allows `auto` and strings but forgot numbers.
 
-**Plan:** [Step-by-step implementation plan]
-1. [Modify file X to do Y]
-2. [Add function Z]
-3. [Update tests]
+**Plan:**
+1. Add `isNumber` to the `gridLine` rule in `cssProperties.js` (fixes all six properties).
+2. No new function needed — `isNumber` already exists.
+3. Add tests for numeric grid values, including a negative one (`gridRowStart: -1`).
 
-**Implement:** [Link to your branch/commits as you work]
+**Implement:**
+- Branch: https://github.com/ahmedsadid/stylex/tree/issue-1701
+- Commit: [`fc844ab1`](https://github.com/ahmedsadid/stylex/commit/fc844ab1)
+- PR: [‹PR link›](https://github.com/facebook/stylex/pull/1730)
 
-**Review:** [Self-review checklist - does it follow the project's contribution guidelines?]
+**Review:**
+- [x] Atomic, targeted changes following existing conventions
+- [x] Includes tests
 
-**Evaluate:** [How will you verify it works?]
+**Evaluate:** Wrote a failing test first, then confirmed the fix passed. Full suite
+passes (548 tests), plus flow, prettier, and lint — matching CI.
+
 
 ---
 
 ## Testing Strategy
 
-### Unit Tests
-
-- [ ] Test case 1: [Description]
-- [ ] Test case 2: [Description]
-- [ ] Test case 3: [Description]
-
-### Integration Tests
-
-- [ ] Integration scenario 1
-- [ ] Integration scenario 2
-
-### Manual Testing
-
-[What you tested manually and results]
+- Reproduced the bug with a failing test, then confirmed the fix made it pass.
+- Used the plugin's `RuleTester` suite (`npx jest stylex-valid-styles`).
+- Covered all six properties, including a negative value (`gridRowStart: -1`).
+- Ran the full suite (548 passing) plus flow, prettier, and lint before pushing.
 
 ---
 
 ## Implementation Notes
 
-### Week [X] Progress
+### Week 3 Progress
 
-[What you built this week, challenges faced, decisions made]
-
-### Week [Y] Progress
-
-[Continue documenting as you work]
+- Found that the `stylex-valid-styles` ESLint rule rejected numbers like
+  `gridColumnStart: 1`, even though they're valid CSS.
+- Traced it to one shared rule, `gridLine`, in `cssProperties.js`, which allowed
+  only `auto` and strings — not numbers.
+- Wrote a failing test first to confirm the bug.
+- Made changes to the code to fix the bug.
+- Fixed it by adding `isNumber` to `gridLine`, which fixes all six grid-line
+  properties at once.
+- Added tests, rebased onto upstream, squashed to one commit, and opened a PR.
 
 ### Code Changes
 
-- **Files modified:** [List]
-- **Key commits:** [Links to important commits]
-- **Approach decisions:** [Why you chose certain approaches]
+- **Files modified:**
+  - `packages/@stylexjs/eslint-plugin/src/reference/cssProperties.js`
+  - `packages/@stylexjs/eslint-plugin/__tests__/stylex-valid-styles-test.js`
+- **Key commit:** [`fc844ab1`](https://github.com/ahmedsadid/stylex/commit/fc844ab1) — Fix #1701
+- **Approach decisions:** Fixed the shared `gridLine` rule instead of each property; used
+  `isNumber` to match the existing `zIndex` convention.
 
 ---
 
 ## Pull Request
 
-**PR Link:** [GitHub PR URL when submitted]
+**PR Link:** https://github.com/facebook/stylex/pull/1730
 
-**PR Description:** [Draft or final PR description - much of the content above can be adapted]
+**PR Description:** See PR link.
 
 **Maintainer Feedback:**
 - [Date]: [Summary of feedback received]
 - [Date]: [How you addressed it]
 
-**Status:** [Awaiting review / Iterating / Approved / Merged]
+**Status:** Awaiting Review
 
 ---
 
