@@ -3,7 +3,7 @@
 **Contribution Number:** 1  
 **Student:** Zubayer Sadid  
 **Issue:** https://github.com/facebook/stylex/issues/1701  
-**Status:** Phase III Completed  
+**Status:** Phase IV Complete
 
 
 ---
@@ -162,9 +162,12 @@ passes (548 tests), plus flow, prettier, and lint — matching CI.
 
 **PR Link:** https://github.com/facebook/stylex/pull/1730
 
-**PR Description:** See PR link.
+**PR Description:**  The `stylex-valid-styles` rule rejected numeric literals for grid line properties, even though they are valid CSS. This happened because the shared `gridLine` rule in `cssProperties.js` only permitted `auto` and string values, not numbers. This change adds `isNumber` to the `gridLine` rule. Because all six grid line properties — `gridColumn`, `gridColumnStart`, `gridColumnEnd`, `gridRow`, `gridRowStart`, `gridRowEnd` (and `gridArea`) — derive from `gridLine`, the single change fixes them all. 
 
 **Maintainer Feedback:**
+
+None so far.
+
 - [Date]: [Summary of feedback received]
 - [Date]: [How you addressed it]
 
